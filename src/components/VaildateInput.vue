@@ -1,20 +1,35 @@
 <template>
-    <input
-        class="form-control"
-        @blur="validateInput"
-        @input="updateValue"
-        v-model="inputRef.value"
-        v-bind="$attrs"
-    />
+  <input
+    class="form-control"
+    @blur="validate"
+    @input="updateValue"
+    v-model="inputRef"
+    v-bind="$attrs"
+  />
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@vue/runtime-core'
+import { defineComponent, ref } from '@vue/runtime-core'
+import { emitter } from '../emitter'
 
 export default defineComponent({
+  name: 'cc-input',
   props: {
-    rules: Array as PropType<RulesProp>,
     modelValue: String
+  },
+  setup (props, context) {
+    const inputRef = ref('')
+
+    const validate = () => {
+      emitter.emit('validate')
+    }
+
+    const updateValue = (e: Event) => {
+      inputRef.value = (e.target as HTMLInputElement).value
+      context.emit('update:modelValue', inputRef.value)
+    }
+
+    return { inputRef, updateValue, validate }
   }
 })
 </script>
