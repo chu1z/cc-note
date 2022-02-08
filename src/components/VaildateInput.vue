@@ -15,13 +15,14 @@ import { emitter } from '../emitter'
 export default defineComponent({
   name: 'cc-input',
   props: {
-    modelValue: String
+    modelValue: String,
+    prop: String
   },
   setup (props, context) {
     const inputRef = ref('')
 
     const validate = () => {
-      emitter.emit('validate')
+      emitter.emit('validate', props.prop)
     }
 
     const updateValue = (e: Event) => {

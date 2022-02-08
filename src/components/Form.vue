@@ -1,12 +1,13 @@
 <template>
-    <form class="validate-form-container">
-        <slot></slot>
-        <div class="submit-area" @click.prevent="submitForm">
-            <slot name="sumbit">
-                <button class="btn btn-outline-primary">提交</button>
-            </slot>
-        </div>
-    </form>
+  <form class="validate-form-container">
+    <slot></slot>
+    <div class="submit-area" @click.prevent="submitForm">
+      <slot name="sumbit">
+        <button class="btn btn-outline-primary">提交</button>
+      </slot>
+    </div>
+    <slot name="link"></slot>
+  </form>
 </template>
 
 <script lang="ts">

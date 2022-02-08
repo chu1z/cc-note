@@ -1,8 +1,10 @@
 <template>
-  <div class="form-item">
-    <label v-if="label"></label>
-    <slot></slot>
-    <p v-if="error" class="invalid-feedback">{{ errorDesc }}</p>
+  <div class="form-item mb-3">
+    <label v-if="label" class="form-label">{{ label }}</label>
+    <!-- <div :class="error ? `is-invalid` : ``"> -->
+      <slot></slot>
+    <!-- </div> -->
+    <!-- <p v-if="error" class="invalid-feedback">{{ errorDesc }}</p> -->
   </div>
 </template>
 
@@ -65,8 +67,10 @@ export default defineComponent({
     }
     onMounted(() => {
       emitter.emit('form-item-created', validate)
-      emitter.on('validate', () => {
-        validate()
+      emitter.on('validate', (prop: string | undefined) => {
+        if (props.prop === prop) {
+          validate()
+        }
       })
     })
     return { error, errorDesc }

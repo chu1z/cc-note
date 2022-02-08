@@ -1,29 +1,75 @@
 <template>
-    <cc-form>
-        <cc-form-item>
-            <cc-input></cc-input>
-        </cc-form-item>
-        <cc-form-item>
-            <cc-input></cc-input>
-        </cc-form-item>
+  <div class="container">
+    <cc-form class="cc-form">
+      <cc-form-item class="mb-4">
+        <h2 class="text-center">CC-Note</h2>
+      </cc-form-item>
+      <cc-form-item :prop="`email`">
+        <cc-input type="email" placeholder="请输入邮箱" v-model="model.email" :prop="`email`"></cc-input>
+      </cc-form-item>
+      <cc-form-item :prop="`password`">
+        <cc-input type="password" placeholder="请输入密码" v-model="model.password" :prop="`password`"></cc-input>
+      </cc-form-item>
+      <template v-slot:sumbit>
+        <div class="d-grid" gap-2>
+          <button class="btn btn-primary">登录</button>
+        </div>
+      </template>
+      <template v-slot:link>
+        <div class="d-flex justify-content-between mt-3">
+          <router-link to="/register">注册账号</router-link>
+          <router-link to="/">忘记密码</router-link>
+        </div>
+      </template>
     </cc-form>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core'
+import { defineComponent, provide, reactive } from '@vue/runtime-core'
 
-import CCForm from '../components/Form.vue'
-import CCFormItem from '../components/FormItem.vue'
+import ccForm from '../components/Form.vue'
+import ccFormItem from '../components/FormItem.vue'
+import ccInput from '../components/VaildateInput.vue'
+import { key, RuleProp } from '../type'
 
-import CCInput from '../components/VaildateInput.vue'
 export default defineComponent({
-  component: {
-    CCForm,
-    CCFormItem,
-    CCInput
+  components: {
+    ccForm,
+    ccFormItem,
+    ccInput
+  },
+  setup () {
+    const model = reactive({
+      email: '',
+      password: ''
+    })
+    const rules = reactive({
+      email: [
+        { type: 'required', message: '邮箱不能为空' } as RuleProp,
+        { type: 'email', message: '邮箱格式不正确' } as RuleProp
+      ],
+      password: [
+        { type: 'required', message: '密码不能为空' } as RuleProp
+      ]
+    })
+
+    provide(key, {
+      model, rules
+    })
+    return {
+      model
+    }
   }
 })
 </script>
 
-<style>
+<style scoped>
+.cc-form {
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>

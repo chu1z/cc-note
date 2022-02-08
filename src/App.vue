@@ -1,5 +1,6 @@
 <script lang="ts">
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/reset.css'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
