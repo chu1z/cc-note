@@ -35,10 +35,10 @@
 <script lang="ts">
 import { defineComponent, provide, reactive } from '@vue/runtime-core'
 
-import ccForm from '../components/Form/Form.vue'
-import ccFormItem from '../components/Form/FormItem.vue'
-import ccInput from '../components/Form/VaildateInput.vue'
-import { key, RuleProp } from '../components/Form/type'
+import ccForm from '../components/form/Form.vue'
+import ccFormItem from '../components/form/FormItem.vue'
+import ccInput from '../components/form/VaildateInput.vue'
+import { key, RuleProp } from '../components/form/type'
 
 export default defineComponent({
   components: {

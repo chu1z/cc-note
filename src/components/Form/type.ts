@@ -1,7 +1,6 @@
 import { InjectionKey } from 'vue'
 
 export type ValidateFunc = () => boolean;
-
 export interface RuleProp {
   type: 'required' | 'email' | 'range';
   message?: string;

@@ -1,6 +1,6 @@
 <template>
     <div
-      class="alert alert-dismissible fade show mx-auto mt-2"
+      class="alert alert-dismissible fade show mx-auto mt-2  fixed-top "
       :class="classObject"
       v-if="isVisible"
     >
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
-import { AlertType } from './type'
+import { AlertType } from '../alert/type'
 
 export default defineComponent({
   props: {

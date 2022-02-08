@@ -14,7 +14,7 @@
 
 import { defineComponent, onUnmounted } from '@vue/runtime-core'
 import { emitter } from '../../emitter'
-import { ValidateFunc } from './type'
+import { ValidateFunc } from '../form/type'
 
 export default defineComponent({
   name: 'cc-form',

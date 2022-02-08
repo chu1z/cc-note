@@ -10,9 +10,9 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, inject } from '@vue/runtime-core'
-import { emailReg, key } from './type'
+import { emailReg, key } from '../form/type'
 import { emitter } from '../../emitter'
-import createAlert from '../Alert/createAlert'
+import createAlert from '../alert/createAlert'
 
 export default defineComponent({
   name: 'cc-form-item',

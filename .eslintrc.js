@@ -19,7 +19,19 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': ['error', {
-      ignores: ['Home', 'Login', 'Form', 'Register', 'Alert']
+      ignores: [
+        'Home',
+        'Login',
+        'Form',
+        'Register',
+        'Alert',
+        'Main',
+        'Header',
+        'Footer',
+        'Container',
+        'Textarea',
+        'Block'
+      ]
     }],
     'space-before-function-paren': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

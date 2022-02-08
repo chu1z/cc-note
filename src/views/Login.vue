@@ -5,10 +5,20 @@
         <h2 class="text-center">CC-Note</h2>
       </cc-form-item>
       <cc-form-item :prop="`email`">
-        <cc-input type="email" placeholder="请输入邮箱" v-model="model.email" :prop="`email`"></cc-input>
+        <cc-input
+          type="email"
+          placeholder="请输入邮箱"
+          v-model="model.email"
+          :prop="`email`"
+        ></cc-input>
       </cc-form-item>
       <cc-form-item :prop="`password`">
-        <cc-input type="password" placeholder="请输入密码" v-model="model.password" :prop="`password`"></cc-input>
+        <cc-input
+          type="password"
+          placeholder="请输入密码"
+          v-model="model.password"
+          :prop="`password`"
+        ></cc-input>
       </cc-form-item>
       <template v-slot:sumbit>
         <div class="d-grid" gap-2>
@@ -28,10 +38,10 @@
 <script lang="ts">
 import { defineComponent, provide, reactive } from '@vue/runtime-core'
 
-import ccForm from '../components/Form/Form.vue'
-import ccFormItem from '../components/Form/FormItem.vue'
-import ccInput from '../components/Form/VaildateInput.vue'
-import { key, RuleProp } from '../components/Form/type'
+import ccForm from '../components/form/Form.vue'
+import ccFormItem from '../components/form/FormItem.vue'
+import ccInput from '../components/form/VaildateInput.vue'
+import { key, RuleProp } from '../components/form/type'
 
 export default defineComponent({
   components: {
@@ -39,7 +49,7 @@ export default defineComponent({
     ccFormItem,
     ccInput
   },
-  setup () {
+  setup() {
     const model = reactive({
       email: '',
       password: ''
@@ -49,13 +59,12 @@ export default defineComponent({
         { type: 'required', message: '邮箱不能为空!' } as RuleProp,
         { type: 'email', message: '邮箱格式不正确!' } as RuleProp
       ],
-      password: [
-        { type: 'required', message: '密码不能为空!' } as RuleProp
-      ]
+      password: [{ type: 'required', message: '密码不能为空!' } as RuleProp]
     })
 
     provide(key, {
-      model, rules
+      model,
+      rules
     })
     return {
       model
