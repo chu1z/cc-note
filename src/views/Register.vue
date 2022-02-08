@@ -35,10 +35,10 @@
 <script lang="ts">
 import { defineComponent, provide, reactive } from '@vue/runtime-core'
 
-import ccForm from '../components/Form.vue'
-import ccFormItem from '../components/FormItem.vue'
-import ccInput from '../components/VaildateInput.vue'
-import { key, RuleProp } from '../type'
+import ccForm from '../components/Form/Form.vue'
+import ccFormItem from '../components/Form/FormItem.vue'
+import ccInput from '../components/Form/VaildateInput.vue'
+import { key, RuleProp } from '../components/Form/type'
 
 export default defineComponent({
   components: {
@@ -50,19 +50,18 @@ export default defineComponent({
     const model = reactive({
       username: '',
       email: '',
-      password: '',
-      password2: ''
+      password: ''
     })
     const rules = reactive({
       username: [
-                { type: 'required', message: '昵称不能为空' } as RuleProp
+                { type: 'required', message: '昵称不能为空！' } as RuleProp
       ],
       email: [
-                { type: 'required', message: '邮箱不能为空' } as RuleProp,
-                { type: 'email', message: '邮箱格式不正确' } as RuleProp
+                { type: 'required', message: '邮箱不能为空！' } as RuleProp,
+                { type: 'email', message: '邮箱格式不正确！' } as RuleProp
       ],
       password: [
-                { type: 'required', message: '密码不能为空' } as RuleProp
+                { type: 'required', message: '密码不能为空！' } as RuleProp
       ]
     })
 

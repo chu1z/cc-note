@@ -2,7 +2,7 @@
   <div class="form-item mb-3">
     <label v-if="label" class="form-label">{{ label }}</label>
     <!-- <div :class="error ? `is-invalid` : ``"> -->
-      <slot></slot>
+    <slot></slot>
     <!-- </div> -->
     <!-- <p v-if="error" class="invalid-feedback">{{ errorDesc }}</p> -->
   </div>
@@ -10,8 +10,9 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, inject } from '@vue/runtime-core'
-import { emailReg, key } from '../type'
-import { emitter } from '../emitter'
+import { emailReg, key } from './type'
+import { emitter } from '../../emitter'
+import createAlert from '../Alert/createAlert'
 
 export default defineComponent({
   name: 'cc-form-item',
@@ -25,7 +26,7 @@ export default defineComponent({
       default: ''
     }
   },
-  setup (props) {
+  setup(props) {
     const error = ref(false)
     const errorDesc = ref('')
     const formData = inject(key)
@@ -61,6 +62,9 @@ export default defineComponent({
           return passed
         })
         error.value = !allPassed
+        if (!allPassed) {
+          createAlert(errorDesc.value, 'error', 3000)
+        }
         return allPassed
       }
       return true

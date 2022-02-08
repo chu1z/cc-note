@@ -21,14 +21,6 @@ export type FormData = {
   rules?: { [key: string]: RulesProp }
 }
 
-export type FormItem = {
-  validate: () => Promise<boolean>
-}
-
-export type FormType = {
-  validate: (cb: (isValid: boolean) => void) => void
-}
-
 export const key: InjectionKey<FormData> = Symbol('form-data')
 
 export const emailReg =
