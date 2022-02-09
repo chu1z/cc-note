@@ -18,6 +18,9 @@
         </cc-block-header>
         <span class="badge bg-info mb-2">#{{ item.tag }}</span>
         <ccTextarea :itemData="item" />
+        <cc-block-footer>
+          ssssssssss
+        </cc-block-footer>
       </cc-block>
     </cc-main>
   </ccContainer>
@@ -32,6 +35,7 @@ import ccBlock from '../components/block/Block.vue'
 import ccBlockHeader from '../components/block/BlockHeader.vue'
 import ccTextarea from '../components/block/Textarea.vue'
 import ccDropDown from '../components/dropdown/DropDown.vue'
+import ccBlockFooter from '../components/block/BlockFooter.vue'
 
 import { testData } from '../test'
 export default defineComponent({
@@ -42,7 +46,8 @@ export default defineComponent({
     ccBlock,
     ccBlockHeader,
     ccTextarea,
-    ccDropDown
+    ccDropDown,
+    ccBlockFooter
   },
   setup() {
     return { testData }

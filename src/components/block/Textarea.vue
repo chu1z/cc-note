@@ -1,24 +1,17 @@
 <template>
-  <div class="cc-textarea fs-6">
-    <pre
-      class="form-control cc-textarea-edit"
-      v-if="isEdit"
-      contenteditable="true"
-    >{{originalText}}</pre>
-    <div v-else v-html="markedText"></div>
-  </div>
+  <div
+    ref="richTextRef"
+    class="cc-textarea mb-4"
+    @dblclick="dblclick"
+    v-html="isEdit ? originalText : markedText"
+    :contenteditable="isEdit"
+    :class="!isOpen?`fix-height `:``"
+  ></div>
 </template>
 
 <script lang='ts'>
-import {
-  defineComponent,
-  onMounted,
-  onUnmounted,
-  PropType,
-  ref
-} from '@vue/runtime-core'
-import { emitter } from '../../emitter'
-import useMarkDown from '../../hooks/useMarkDown'
+import { defineComponent, onMounted, PropType, ref } from '@vue/runtime-core'
+import useMarkDown from '../../hooks/useMarkdown'
 
 import { blockData } from './type'
 
@@ -28,33 +21,42 @@ export default defineComponent({
     itemData: Object as PropType<blockData>
   },
   setup(props, context) {
+    const isOpen = ref(false)
     const isEdit = ref(false)
+    const richTextRef = ref<null | HTMLElement>(null)
 
-    const { originalText, markedText } = useMarkDown(props.itemData?.content || '')
-
+    const { originalText, markedText } = useMarkDown(
+      props.itemData?.content || ''
+    )
+    const dblclick = () => {
+      isEdit.value = !isEdit.value
+      if (!isEdit.value && richTextRef.value) {
+        originalText.value = (richTextRef.value as HTMLElement).innerHTML
+      }
+    }
     onMounted(() => {
-      emitter.on('double-click', (id) => {
-        if (id === props.itemData?.id) {
-          isEdit.value = true
-        }
-      })
+      isOpen.value = (richTextRef.value as HTMLElement).scrollHeight <= 200
+      console.log((richTextRef.value as HTMLElement).scrollHeight)
     })
-
-    onUnmounted(() => {
-      emitter.off('double-click')
-    })
-
-    return { isEdit, originalText, markedText }
+    return { isOpen, isEdit, originalText, markedText, richTextRef, dblclick }
   }
 })
 </script>
 
 <style>
-.cc-textarea-edit {
-  resize: none;
-  width: 100%; /*自动适应父布局宽度*/
-  overflow: auto;
-  word-break: break-all;
-  height: 100%;
+.cc-textarea {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+  /* height: 200px; */
+}
+
+.fix-height {
+  height: 200px;
+}
+
+[contenteditable]:focus {
+  outline: none;
 }
 </style>

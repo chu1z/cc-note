@@ -2,19 +2,16 @@
   <div
     ref="blockRef"
     class="cc-block p-3 mb-2 bg-body rounded"
-    :class="[isEnter ? `shadow ` : `shadow-sm`, isOpen ? `` : `max`]"
+    :class="[isEnter ? `shadow ` : `shadow-sm`]"
     @mouseenter="enter"
     @mouseleave="leave"
-    @dblclick="dblclick"
   >
     <slot />
-    <div class="cc-block-footer" v-if="!isShowAll">sssssssssadsfas</div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, ref } from '@vue/runtime-core'
-import { emitter } from '../../emitter'
+import { defineComponent, ref } from '@vue/runtime-core'
 
 export default defineComponent({
   name: 'cc-block',
@@ -25,39 +22,21 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    const isOpen = ref(false)
     const isEnter = ref(false)
     const blockRef = ref<null | HTMLElement>(null)
-    const isShowAll = ref(true)
     const enter = () => {
       isEnter.value = true
     }
     const leave = () => {
       isEnter.value = false
     }
-    const dblclick = () => {
-      isOpen.value = true
-      emitter.emit('double-click', props.id)
-    }
-    onMounted(() => {
-      isShowAll.value = (blockRef.value as HTMLElement).scrollHeight <= 300
-    })
-    return { enter, leave, isEnter, isOpen, dblclick, isShowAll, blockRef }
+    return { enter, leave, isEnter, blockRef }
   }
 })
 </script>
 
 <style scoped>
 .cc-block {
-  display: block;
   position: relative;
-  overflow: hidden;
-}
-.cc-block-footer{
-  position: absolute;
-  bottom: 5%;
-}
-.max {
-  max-height: 300px;
 }
 </style>

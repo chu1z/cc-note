@@ -35,7 +35,7 @@ export const testData = [
     id: 3,
     tag: '编程',
     content:
-            `Promise.prototype.then()
+      `Promise.prototype.then()
 
       then() 方法返回一个 Promise。它最多需要有两个参数：Promise 的成功和失败情况的回调函数。
       
@@ -104,6 +104,11 @@ export const testData = [
       注意: 在finally回调中 throw（或返回被拒绝的promise）将以 throw() 指定的原因拒绝新的promise.
       
       (finally 中使用 throw 抛出异常 会使状态变为 rejected 其他操作都是 上面如何就如何）`,
+    time: 1644322624
+  }, {
+    id: 4,
+    tag: '编程',
+    content: '### 111 \n **AAA**',
     time: 1644322624
   }
 
