@@ -3,8 +3,20 @@
     <cc-aside :width="`30%`"></cc-aside>
     <cc-main>
       <cc-block v-for="item in testData" :key="item.id" :id="item.id">
-        <cc-block-header :message="new Date(item.time).toLocaleString()"></cc-block-header>
-        <span class="badge bg-info mb-2">#{{item.tag}}</span>
+        <cc-block-header :message="new Date(item.time).toLocaleString()">
+          <cc-drop-down>
+            <template v-slot:control>
+              <i class="fa fa-bars"></i>
+            </template>
+            <dropdown-item disabled
+              ><a href="#" class="dropdown-item">编辑资料</a></dropdown-item
+            >
+            <dropdown-item
+              ><a href="#" class="dropdown-item">退出登陆</a></dropdown-item
+            >
+          </cc-drop-down>
+        </cc-block-header>
+        <span class="badge bg-info mb-2">#{{ item.tag }}</span>
         <ccTextarea :itemData="item" />
       </cc-block>
     </cc-main>
@@ -19,6 +31,7 @@ import ccContainer from '../components/container/Container.vue'
 import ccBlock from '../components/block/Block.vue'
 import ccBlockHeader from '../components/block/BlockHeader.vue'
 import ccTextarea from '../components/block/Textarea.vue'
+import ccDropDown from '../components/dropdown/DropDown.vue'
 
 import { testData } from '../test'
 export default defineComponent({
@@ -28,7 +41,8 @@ export default defineComponent({
     ccContainer,
     ccBlock,
     ccBlockHeader,
-    ccTextarea
+    ccTextarea,
+    ccDropDown
   },
   setup() {
     return { testData }

@@ -50,11 +50,12 @@ export default defineComponent({
 <style scoped>
 .cc-block {
   display: block;
+  position: relative;
   overflow: hidden;
 }
 .cc-block-footer{
   position: absolute;
-  bottom: 20%;
+  bottom: 5%;
 }
 .max {
   max-height: 300px;

@@ -1,7 +1,7 @@
 <template>
   <div class="cc-block-header d-flex justify-content-between mb-1">
     <small class="text-black-50">{{ message }}</small>
-    <i class="fa fa-bars"></i>
+    <slot></slot>
   </div>
 </template>
 
