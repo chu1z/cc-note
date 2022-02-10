@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, inject } from '@vue/runtime-core'
-import { emailReg, key } from '../form/type'
+import { emailReg, formkey } from '../form/type'
 import { emitter } from '../../emitter'
 import createAlert from '../alert/createAlert'
 
@@ -29,7 +29,7 @@ export default defineComponent({
   setup(props) {
     const error = ref(false)
     const errorDesc = ref('')
-    const formData = inject(key)
+    const formData = inject(formkey)
     const validate = () => {
       if (formData?.rules === undefined) {
         return true

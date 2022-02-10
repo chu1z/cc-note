@@ -11,7 +11,8 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref } from '@vue/runtime-core'
+import { defineComponent, provide, ref } from '@vue/runtime-core'
+import { blockkey } from './type'
 
 export default defineComponent({
   name: 'cc-block',
@@ -30,6 +31,10 @@ export default defineComponent({
     const leave = () => {
       isEnter.value = false
     }
+
+    const isOpen = ref(false)
+    provide(blockkey, isOpen)
+
     return { enter, leave, isEnter, blockRef }
   }
 })

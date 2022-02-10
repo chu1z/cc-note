@@ -20,7 +20,7 @@ export type FormData = {
   rules?: { [key: string]: RulesProp }
 }
 
-export const key: InjectionKey<FormData> = Symbol('form-data')
+export const formkey: InjectionKey<FormData> = Symbol('form-data')
 
 export const emailReg =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/

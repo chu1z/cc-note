@@ -38,7 +38,7 @@ import { defineComponent, provide, reactive } from '@vue/runtime-core'
 import ccForm from '../components/form/Form.vue'
 import ccFormItem from '../components/form/FormItem.vue'
 import ccInput from '../components/form/VaildateInput.vue'
-import { key, RuleProp } from '../components/form/type'
+import { formkey, RuleProp } from '../components/form/type'
 
 export default defineComponent({
   components: {
@@ -65,7 +65,7 @@ export default defineComponent({
       ]
     })
 
-    provide(key, {
+    provide(formkey, {
       model, rules
     })
     return {
