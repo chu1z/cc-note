@@ -20,4 +20,8 @@ body,
   height: 100%;
   background:#e7e6e6;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
 </style>

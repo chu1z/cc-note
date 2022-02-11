@@ -1,5 +1,5 @@
 <template>
-  <div class="cc-block-edit b-flex mb-1" v-if="isShow">
+  <div class="cc-block-edit" v-if="isShow">
     <slot></slot>
   </div>
 </template>

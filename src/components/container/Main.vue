@@ -17,7 +17,7 @@ export default defineComponent({
   display: block;
   flex: 1;
   flex-basis: auto;
-  overflow: auto;
+  overflow:auto;
   box-sizing: border-box;
   padding: 20px;
   background-color: rgb(26, 11, 12, 0.1);

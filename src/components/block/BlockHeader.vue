@@ -1,14 +1,25 @@
 <template>
-  <div class="cc-block-header d-flex justify-content-between mb-1">
+  <div v-if="isShow" class="cc-block-header d-flex justify-content-between mb-1">
     <slot></slot>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent } from '@vue/runtime-core'
+import { computed, defineComponent } from '@vue/runtime-core'
+import { inject } from 'vue'
+import { blockkey } from './type'
 
 export default defineComponent({
-  name: 'cc-block-header'
+  name: 'cc-block-header',
+  setup() {
+    const blockData = inject(blockkey)
+
+    const isShow = computed(() => {
+      return blockData && !blockData.isEdit
+    })
+
+    return { isShow }
+  }
 })
 </script>
 

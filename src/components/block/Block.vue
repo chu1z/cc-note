@@ -1,30 +1,46 @@
 <template>
   <div
-    ref="blockRef"
-    class="cc-block p-3 mb-2 bg-body rounded"
-    :class="[isEnter ? `shadow ` : `shadow-sm`]"
+    class="cc-block px-3 py-2 mb-2 bg-body rounded"
+    :class="classObj"
+    :style="styleObject"
     @mouseenter="enter"
     @mouseleave="leave"
   >
+  <div :class="classObj2">
     <slot />
+  </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, provide, reactive, ref } from '@vue/runtime-core'
+import {
+  computed,
+  defineComponent,
+  provide,
+  reactive,
+  ref
+} from '@vue/runtime-core'
 import { blockkey } from './type'
 
 export default defineComponent({
   name: 'cc-block',
   props: {
-    id: {
-      type: Number,
-      required: true
-    }
+    height: Number,
+    isOpen: Boolean,
+    isEdit: Boolean,
+    canClick: Boolean
   },
   setup(props, context) {
     const isEnter = ref(false)
-    const blockRef = ref<null | HTMLElement>(null)
+    const blockState = reactive({
+      isMax: false,
+      isOpen: props.isOpen,
+      isEdit: props.isEdit,
+      canClick: props.canClick
+    })
+
+    provide(blockkey, blockState)
+
     const enter = () => {
       isEnter.value = true
     }
@@ -32,15 +48,19 @@ export default defineComponent({
       isEnter.value = false
     }
 
-    const blockState = reactive({
-      isMax: false,
-      isOpen: false,
-      isEdit: false
+    const classObj = computed(() => {
+      return {
+        shadow: isEnter.value,
+        'shadow-sm': !isEnter.value
+      }
     })
 
-    provide(blockkey, blockState)
+    const classObj2 = computed(() => {
+      return { 'cc-block-edit': blockState.isEdit }
+    })
+    const styleObject = props.height ? { height: props.height + 'px' } : ''
 
-    return { enter, leave, isEnter, blockRef }
+    return { enter, leave, isEnter, classObj, classObj2, styleObject }
   }
 })
 </script>
@@ -48,5 +68,15 @@ export default defineComponent({
 <style scoped>
 .cc-block {
   position: relative;
+}
+
+.cc-block-edit {
+  font-size: 14px;
+  padding: 10px 15px;
+  color: #323232;
+  background: #fff;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  height: 100%;
 }
 </style>

@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="cc-block-tool"
-    @click.prevent="onClick"
-    v-if="isShow"
-  >
+  <div class="cc-block-tool" @click.prevent="onClick" v-if="isShow">
     {{ message }}<i class="fa" :class="classObj"></i>
   </div>
 </template>
@@ -31,8 +27,9 @@ export default defineComponent({
     const onClick = () => {
       blockData.isOpen = !blockData.isOpen
     }
-
-    const isShow = computed(() => blockData && !blockData.isEdit)
+    const isShow = computed(
+      () => blockData && !blockData.isMax && !blockData.isEdit
+    )
 
     return { classObj, onClick, message, isShow }
   }
@@ -42,6 +39,7 @@ export default defineComponent({
 <style>
 .cc-block-tool {
   color: #9d9d9d;
+  width: 50px;
   font-size: 12px;
   text-decoration: none;
   background-color: #efefef;

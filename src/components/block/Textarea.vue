@@ -1,7 +1,7 @@
 <template>
   <div
     ref="richTextRef"
-    class="cc-textarea mb-4"
+    class="cc-textarea mb-2"
     @dblclick="dblclick"
     v-html="blockData && blockData.isEdit ? originalText : markedText"
     :contenteditable="blockData && blockData.isEdit"
@@ -36,7 +36,7 @@ export default defineComponent({
     )
 
     const dblclick = () => {
-      if (blockData) {
+      if (blockData && blockData.canClick) {
         blockData.isOpen = !blockData.isOpen
         blockData.isEdit = !blockData.isEdit
         if (!blockData.isEdit && richTextRef.value) {
@@ -47,14 +47,15 @@ export default defineComponent({
 
     const classObj = computed(() => {
       return {
-        'fix-height': !blockData!.isOpen,
-        'cc-textarea-edit': blockData!.isEdit
+        'fix-height': !blockData?.isMax && !blockData!.isOpen
+        // 'cc-textarea-edit': blockData!.isEdit
       }
     })
 
     onMounted(() => {
       if (blockData) {
-        blockData.isMax = (richTextRef.value as HTMLElement).scrollHeight <= 200
+        blockData.isMax =
+          (richTextRef.value as HTMLElement).scrollHeight <= 200
       }
     })
     return {
@@ -75,16 +76,7 @@ export default defineComponent({
   -webkit-box-orient: vertical;
   /* -webkit-line-clamp: 8; */
   overflow: hidden;
-}
-
-.cc-textarea-edit {
-  font-size: 14px;
-  padding: 20px 18px;
-  color: #323232;
-  background: #fff;
-  border: 2px solid #e8e8e8;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  height: 100%;
 }
 
 .fix-height {
