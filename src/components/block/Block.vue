@@ -11,7 +11,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, provide, ref } from '@vue/runtime-core'
+import { defineComponent, provide, reactive, ref } from '@vue/runtime-core'
 import { blockkey } from './type'
 
 export default defineComponent({
@@ -32,8 +32,13 @@ export default defineComponent({
       isEnter.value = false
     }
 
-    const isOpen = ref(false)
-    provide(blockkey, isOpen)
+    const blockState = reactive({
+      isMax: false,
+      isOpen: false,
+      isEdit: false
+    })
+
+    provide(blockkey, blockState)
 
     return { enter, leave, isEnter, blockRef }
   }

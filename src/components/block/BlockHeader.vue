@@ -1,6 +1,5 @@
 <template>
   <div class="cc-block-header d-flex justify-content-between mb-1">
-    <small class="text-black-50">{{ message }}</small>
     <slot></slot>
   </div>
 </template>
@@ -9,9 +8,7 @@
 import { defineComponent } from '@vue/runtime-core'
 
 export default defineComponent({
-  props: {
-    message: String
-  }
+  name: 'cc-block-header'
 })
 </script>
 

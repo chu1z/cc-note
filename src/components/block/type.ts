@@ -1,10 +1,16 @@
-import { InjectionKey, Ref } from 'vue'
+import { InjectionKey } from 'vue'
 
-export interface blockData {
+export interface BlockData {
     id: number,
     tag: string
     content: string,
     time: number
 }
 
-export const blockkey: InjectionKey<Ref<boolean>> = Symbol('block-key')
+export type BlockStateData = {
+    isMax: boolean, // 是否能包裹全部内容
+    isOpen: boolean, // 是否展开了 前置需要isMax为false
+    isEdit: boolean, // 是否处于编辑状态
+}
+
+export const blockkey: InjectionKey<BlockStateData | undefined> = Symbol('block-key')

@@ -1,18 +1,21 @@
 <template>
-  <div class="cc-textarea-footer" v-if="!isOpen">
+  <div
+    class="cc-textarea-footer d-flex justify-content-between mb-2"
+    v-if="isShow"
+  >
     <slot />
   </div>
 </template>
 
 <script>
-import { defineComponent, inject } from '@vue/runtime-core'
+import { computed, defineComponent, inject } from '@vue/runtime-core'
 import { blockkey } from './type'
 export default defineComponent({
   name: 'cc-block-footer',
   setup() {
-    const isOpen = inject(blockkey)
-
-    return { isOpen }
+    const blockData = inject(blockkey)
+    const isShow = computed(() => !(blockData && blockData.isMax))
+    return { isShow }
   }
 })
 </script>
