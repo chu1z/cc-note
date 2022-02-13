@@ -1,7 +1,7 @@
 <template>
   <div
     ref="richTextRef"
-    class="cc-textarea mb-2"
+    class="cc-rich-text mb-2"
     @dblclick="dblclick"
     v-html="blockData.isEdit ? originalText : markedText"
     :contenteditable="blockData.isEdit"
@@ -22,7 +22,7 @@ import useMarkDown from '../../hooks/useMarkdown'
 import { blockkey, BlockData } from './type'
 
 export default defineComponent({
-  name: 'cc-textarea',
+  name: 'cc-rich-text',
   props: {
     itemData: Object as PropType<BlockData>
   },
@@ -52,7 +52,7 @@ export default defineComponent({
 
     const classObj = computed(() => {
       return {
-        'cc-textarea-need-open': blockData.needOpen && !blockData.isOpen
+        'cc-rich-text-need-open': blockData.needOpen && !blockData.isOpen
       }
     })
 
@@ -73,14 +73,14 @@ export default defineComponent({
 </script>
 
 <style>
-.cc-textarea {
+.cc-rich-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: scroll;
   min-height: inherit;
 }
 
-.cc-textarea-need-open {
+.cc-rich-text-need-open {
   height: 200px;
   overflow: hidden;
 }

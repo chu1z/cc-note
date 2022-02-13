@@ -1,67 +1,55 @@
 <template>
   <cc-container>
-    <cc-aside :width="`30%`"></cc-aside>
-    <cc-main class="flex-cloumn" style="overflow-y: hidden">
+    <cc-aside :width="`30%`" style="padding: 20px">
+      <div class="my-3 h5">
+        <i class="fa fa-user-o text-body" />
+        chu
+      </div>
+      <div
+        class="d-flex justify-content-between mb-3 text-center text-secondary"
+      >
+        <div>
+          <small class="my-5">Note</small>
+          <h5>98</h5>
+        </div>
+        <div>
+          <small class="my-5">Tag</small>
+          <h5>98</h5>
+        </div>
+        <div>
+          <small class="my-5">Day</small>
+          <h5>98</h5>
+        </div>
+      </div>
+      <div class="mb-3" style="height: 170px; background-color: #f7f7f7"></div>
+      <div>
+        <cc-foldtag>
+          <cc-foldtag-item :tag="`编程`" :isSelect="true"></cc-foldtag-item>
+          <cc-foldtag-item :tag="`编程`"></cc-foldtag-item>
+          <cc-foldtag-item :tag="`编程`"></cc-foldtag-item>
+        </cc-foldtag>
+      </div>
+    </cc-aside>
+    <cc-main style="overflow-y: hidden">
       <div class="d-flex justify-content-between align-items-center">
-        <div class="h1">Notes</div>
+        <div class="h1">Note</div>
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" />
         </div>
       </div>
       <cc-block :isEdit="true" :canClick="false" :minHeight="50">
         <cc-block-edit>
-          <cc-textarea class="flex-grow-1" />
+          <cc-rich-text class="flex-grow-1" />
           <template v-slot:editBtn>
             <div class="align-self-end">
-              <button type="button" class="btn btn-sm bg-info bg-opacity-50">
+              <button type="button" class="btn btn-sm bg-info bg-opacity-25">
                 发&nbsp;&nbsp;&nbsp;送
               </button>
             </div>
           </template>
         </cc-block-edit>
       </cc-block>
-      <cc-area style="overflow-y: scroll">
-        <cc-block v-for="item in testData" :key="item.id" :canClick="true">
-          <cc-block-header class="justify-content-between align-items-center">
-            <small class="text-black-50">{{
-              new Date(item.time).toLocaleString()
-            }}</small>
-            <cc-dropdown>
-              <template v-slot:control>
-                <i class="fa fa-bars"></i>
-              </template>
-              <cc-dropdown-item disabled>
-                <a href="#" class="dropdown-item">编辑</a>
-              </cc-dropdown-item>
-              <cc-dropdown-item>
-                <a href="#" class="dropdown-item">删除</a>
-              </cc-dropdown-item>
-            </cc-dropdown>
-          </cc-block-header>
-          <cc-block-edit>
-            <div class="mb-2">
-              <span class="badge bg-info">#{{ item.tag }}</span>
-            </div>
-            <cc-textarea :itemData="item" />
-            <template v-slot:openBtn>
-              <cc-block-tool />
-            </template>
-            <template v-slot:editBtn>
-              <div class="align-self-end">
-                <button
-                  type="button"
-                  class="btn btn-sm bg-dark bg-opacity-10 mx-2"
-                >
-                  取&nbsp;&nbsp;&nbsp;消
-                </button>
-                <button type="button" class="btn btn-sm bg-info bg-opacity-50">
-                  发&nbsp;&nbsp;&nbsp;送
-                </button>
-              </div>
-            </template>
-          </cc-block-edit>
-        </cc-block>
-      </cc-area>
+      <cc-content-list :contents="testData"></cc-content-list>
     </cc-main>
   </cc-container>
 </template>

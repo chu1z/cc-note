@@ -7,6 +7,8 @@ export interface BlockData {
     time: number
 }
 
+export type BlockDatas=BlockData[]
+
 export type BlockStateData = {
     needOpen: boolean, // 是否需要展开
     isOpen: boolean, // 是否展开了 前置需要needOpen

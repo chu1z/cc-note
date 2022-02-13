@@ -5,6 +5,7 @@ import alert from './components/alert'
 import block from './components/block'
 import container from './components/container'
 import dropdown from './components/dropdown'
+import foldtag from './components/foldtag'
 import form from './components/form'
 
 import router from './router'
@@ -16,6 +17,7 @@ app.use(alert)
   .use(container)
   .use(dropdown)
   .use(form)
+  .use(foldtag)
 
 app.use(router)
 app.mount('#app')

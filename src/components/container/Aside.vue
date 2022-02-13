@@ -23,5 +23,6 @@ export default defineComponent({
   overflow: auto;
   box-sizing: border-box;
   flex-shrink: 0;
+  display: block;
 }
 </style>
