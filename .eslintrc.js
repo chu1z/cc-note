@@ -30,7 +30,8 @@ module.exports = {
         'Footer',
         'Container',
         'Textarea',
-        'Block'
+        'Block',
+        'Calendar'
       ]
     }],
     'space-before-function-paren': 'off',

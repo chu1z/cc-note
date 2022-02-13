@@ -44,7 +44,7 @@ export default defineComponent({
   font-size: 14px;
   padding: 10px 15px;
   color: #323232;
-  background: #fff;
+  /* background: rgb(255, 255, 255,0.75); */
   border: 2px solid #e8e8e8;
   border-radius: 8px;
   width: 100%;

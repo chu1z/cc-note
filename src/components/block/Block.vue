@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cc-block px-3 py-2 mb-2 bg-body rounded d-flex flex-column"
+    class="cc-block px-3 py-2 mb-2 bg-body rounded d-flex flex-column bg-opacity-75"
     :class="classObj"
     :style="styleObject"
     @mouseenter="enter"

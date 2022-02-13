@@ -18,9 +18,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.dropdown-option{
+/* .dropdown-option{
   background-color:#cccccc
-}
+} */
 .dropdown-option.is-disabled * {
   color: #6c757d;
   pointer-events: none;
