@@ -1,41 +1,31 @@
 <template>
-  <div class="cc-area" :style="styleObj" ref="areaRef">
+  <div class="cc-area" :style="styleObj">
     <slot />
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, reactive, ref } from '@vue/runtime-core'
+import { defineComponent, onMounted, reactive } from '@vue/runtime-core'
 
 export default defineComponent({
   name: 'cc-area',
-  props: {
-    width: {
-      type: String,
-      default: '100%'
-    },
-    height: {
-      type: String,
-      default: '100%'
-    }
-  },
   setup(props) {
-    const areaRef = ref(null)
     const styleObj = reactive({
-      width: props.width,
-      //   height: (document.body.clientHeight - 150) + 'px',
-      position: 'relative'
+      width: '100%',
+      height: '100%'
     })
     onMounted(() => {
-      if (areaRef.value) {
-        // styleObj.height = (areaRef.value as HTMLElement).clientHeight + 'px'
-        console.log((areaRef.value as HTMLElement))
-      }
+      // TODO 这个值要处理
+      styleObj.height =
+        document.documentElement.clientHeight - 150 - 24 - 52 + 'px'
     })
-    return { styleObj, areaRef }
+    return { styleObj }
   }
 })
 </script>
 
 <style>
+.cc-area {
+  position: relative;
+}
 </style>

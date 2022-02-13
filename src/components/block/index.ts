@@ -1,0 +1,16 @@
+import { App } from 'vue'
+import Block from './Block.vue'
+import BlockEdit from './BlockEdit.vue'
+import BlockHeader from './BlockHeader.vue'
+import BlockTool from './BlockTool.vue'
+import Textarea from './Textarea.vue'
+
+export default {
+  install(app:App) {
+    app.component(Block.name, Block)
+    app.component(BlockEdit.name, BlockEdit)
+    app.component(BlockHeader.name, BlockHeader)
+    app.component(Textarea.name, Textarea)
+    app.component(BlockTool.name, BlockTool)
+  }
+}

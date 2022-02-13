@@ -9,6 +9,7 @@ import { computed, defineComponent } from '@vue/runtime-core'
 import { Component, VNode } from 'vue'
 
 export default defineComponent({
+  name: 'cc-container',
   props: {
     direction: String
   },

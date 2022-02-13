@@ -1,5 +1,5 @@
 <template>
-  <div class="cc-block-tool" @click.prevent="onClick" v-if="isShow">
+  <div class="cc-block-tool" @click.prevent="onClick">
     {{ message }}<i class="fa" :class="classObj"></i>
   </div>
 </template>
@@ -27,11 +27,8 @@ export default defineComponent({
     const onClick = () => {
       blockData.isOpen = !blockData.isOpen
     }
-    const isShow = computed(
-      () => blockData && !blockData.isMax && !blockData.isEdit
-    )
 
-    return { classObj, onClick, message, isShow }
+    return { classObj, onClick, message }
   }
 })
 </script>

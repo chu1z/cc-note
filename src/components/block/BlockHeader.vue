@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isShow" class="cc-block-header d-flex justify-content-between mb-1">
+  <div v-if="isShow" class="cc-block-header d-flex mb-1">
     <slot></slot>
   </div>
 </template>

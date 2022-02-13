@@ -1,14 +1,12 @@
 <template>
   <div
-    class="cc-block px-3 py-2 mb-2 bg-body rounded"
+    class="cc-block px-3 py-2 mb-2 bg-body rounded d-flex flex-column"
     :class="classObj"
     :style="styleObject"
     @mouseenter="enter"
     @mouseleave="leave"
   >
-  <div :class="classObj2">
     <slot />
-  </div>
   </div>
 </template>
 
@@ -25,15 +23,15 @@ import { blockkey } from './type'
 export default defineComponent({
   name: 'cc-block',
   props: {
-    height: Number,
     isOpen: Boolean,
     isEdit: Boolean,
-    canClick: Boolean
+    canClick: Boolean,
+    minHeight: Number
   },
   setup(props, context) {
     const isEnter = ref(false)
     const blockState = reactive({
-      isMax: false,
+      needOpen: false,
       isOpen: props.isOpen,
       isEdit: props.isEdit,
       canClick: props.canClick
@@ -55,12 +53,12 @@ export default defineComponent({
       }
     })
 
-    const classObj2 = computed(() => {
-      return { 'cc-block-edit': blockState.isEdit }
-    })
-    const styleObject = props.height ? { height: props.height + 'px' } : ''
+    const styleObject = {}
+    if (props.minHeight) {
+      Object.assign(styleObject, { 'min-height': props.minHeight + 'px' })
+    }
 
-    return { enter, leave, isEnter, classObj, classObj2, styleObject }
+    return { enter, leave, isEnter, classObj, styleObject }
   }
 })
 </script>
@@ -68,15 +66,5 @@ export default defineComponent({
 <style scoped>
 .cc-block {
   position: relative;
-}
-
-.cc-block-edit {
-  font-size: 14px;
-  padding: 10px 15px;
-  color: #323232;
-  background: #fff;
-  border: 2px solid #e8e8e8;
-  border-radius: 8px;
-  height: 100%;
 }
 </style>

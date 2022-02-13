@@ -18,10 +18,14 @@ body,
 #app {
   width: 100%;
   height: 100%;
-  background:#e7e6e6;
+  background: rgb(197, 229, 247, 0.1);
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+[contenteditable]:focus {
+  outline: none;
 }
 </style>

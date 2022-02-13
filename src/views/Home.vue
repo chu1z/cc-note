@@ -1,43 +1,64 @@
 <template>
   <cc-container>
     <cc-aside :width="`30%`"></cc-aside>
-    <cc-main style="overflow-y: hidden">
-      <cc-block :isEdit="true" :canClick="false" :height="150">
-        <ccTextarea />
-        <cc-block-edit class="d-flex justify-content-end gap-2">
-          <button type="button" class="btn btn-sm bg-info bg-opacity-50">
-            发&nbsp;&nbsp;&nbsp;送
-          </button>
+    <cc-main class="flex-cloumn" style="overflow-y: hidden">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="h1">Notes</div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" />
+        </div>
+      </div>
+      <cc-block :isEdit="true" :canClick="false" :minHeight="50">
+        <cc-block-edit>
+          <cc-textarea class="flex-grow-1" />
+          <template v-slot:editBtn>
+            <div class="align-self-end">
+              <button type="button" class="btn btn-sm bg-info bg-opacity-50">
+                发&nbsp;&nbsp;&nbsp;送
+              </button>
+            </div>
+          </template>
         </cc-block-edit>
       </cc-block>
       <cc-area style="overflow-y: scroll">
         <cc-block v-for="item in testData" :key="item.id" :canClick="true">
-          <cc-block-header>
+          <cc-block-header class="justify-content-between align-items-center">
             <small class="text-black-50">{{
               new Date(item.time).toLocaleString()
             }}</small>
-            <cc-drop-down>
+            <cc-dropdown>
               <template v-slot:control>
                 <i class="fa fa-bars"></i>
               </template>
-              <cc-drop-down-item disabled
-                ><a href="#" class="dropdown-item">编辑</a></cc-drop-down-item
-              >
-              <cc-drop-down-item
-                ><a href="#" class="dropdown-item">删除</a></cc-drop-down-item
-              >
-            </cc-drop-down>
+              <cc-dropdown-item disabled>
+                <a href="#" class="dropdown-item">编辑</a>
+              </cc-dropdown-item>
+              <cc-dropdown-item>
+                <a href="#" class="dropdown-item">删除</a>
+              </cc-dropdown-item>
+            </cc-dropdown>
           </cc-block-header>
-          <span class="badge bg-info mb-1">#{{ item.tag }}</span>
-          <ccTextarea :itemData="item" />
-          <cc-block-tool />
-          <cc-block-edit class="d-flex justify-content-end gap-2">
-            <button type="button" class="btn btn-sm bg-dark bg-opacity-10">
-              取&nbsp;&nbsp;&nbsp;消
-            </button>
-            <button type="button" class="btn btn-sm bg-info bg-opacity-50">
-              发&nbsp;&nbsp;&nbsp;送
-            </button>
+          <cc-block-edit>
+            <div class="mb-2">
+              <span class="badge bg-info">#{{ item.tag }}</span>
+            </div>
+            <cc-textarea :itemData="item" />
+            <template v-slot:openBtn>
+              <cc-block-tool />
+            </template>
+            <template v-slot:editBtn>
+              <div class="align-self-end">
+                <button
+                  type="button"
+                  class="btn btn-sm bg-dark bg-opacity-10 mx-2"
+                >
+                  取&nbsp;&nbsp;&nbsp;消
+                </button>
+                <button type="button" class="btn btn-sm bg-info bg-opacity-50">
+                  发&nbsp;&nbsp;&nbsp;送
+                </button>
+              </div>
+            </template>
           </cc-block-edit>
         </cc-block>
       </cc-area>
@@ -47,33 +68,9 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core'
-import ccMain from '../components/container/Main.vue'
-import ccAside from '../components/container/Aside.vue'
-import ccContainer from '../components/container/Container.vue'
-import ccBlock from '../components/block/Block.vue'
-import ccBlockHeader from '../components/block/BlockHeader.vue'
-import ccTextarea from '../components/block/Textarea.vue'
-import ccDropDown from '../components/dropdown/DropDown.vue'
-import ccDropDownItem from '../components/dropdown/DropDownItem.vue'
-import ccBlockTool from '../components/block/BlockTool.vue'
-import ccBlockEdit from '../components/block/BlockEdit.vue'
-import ccArea from '../components/container/Area.vue'
 
 import { testData } from '../test'
 export default defineComponent({
-  components: {
-    ccMain,
-    ccAside,
-    ccContainer,
-    ccBlock,
-    ccBlockHeader,
-    ccTextarea,
-    ccDropDown,
-    ccDropDownItem,
-    ccBlockTool,
-    ccBlockEdit,
-    ccArea
-  },
   setup() {
     return { testData }
   }

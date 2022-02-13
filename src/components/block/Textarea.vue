@@ -3,8 +3,8 @@
     ref="richTextRef"
     class="cc-textarea mb-2"
     @dblclick="dblclick"
-    v-html="blockData && blockData.isEdit ? originalText : markedText"
-    :contenteditable="blockData && blockData.isEdit"
+    v-html="blockData.isEdit ? originalText : markedText"
+    :contenteditable="blockData.isEdit"
     :class="classObj"
   ></div>
 </template>
@@ -27,18 +27,23 @@ export default defineComponent({
     itemData: Object as PropType<BlockData>
   },
   setup(props, context) {
-    const blockData = inject(blockkey)
-
     const richTextRef = ref<null | HTMLElement>(null)
 
     const { originalText, markedText } = useMarkDown(
       props.itemData?.content || ''
     )
 
+    const blockData = inject(blockkey)
+
+    if (blockData === undefined) {
+      throw new Error('Object cannot be empty')
+    }
+
     const dblclick = () => {
-      if (blockData && blockData.canClick) {
-        blockData.isOpen = !blockData.isOpen
+      if (blockData.canClick) {
         blockData.isEdit = !blockData.isEdit
+        blockData.isOpen = blockData.needOpen && blockData.isEdit
+
         if (!blockData.isEdit && richTextRef.value) {
           originalText.value = (richTextRef.value as HTMLElement).innerHTML
         }
@@ -47,16 +52,13 @@ export default defineComponent({
 
     const classObj = computed(() => {
       return {
-        'fix-height': !blockData?.isMax && !blockData!.isOpen
-        // 'cc-textarea-edit': blockData!.isEdit
+        'cc-textarea-need-open': blockData.needOpen && !blockData.isOpen
       }
     })
 
     onMounted(() => {
-      if (blockData) {
-        blockData.isMax =
-          (richTextRef.value as HTMLElement).scrollHeight <= 200
-      }
+      blockData.needOpen =
+        (richTextRef.value as HTMLElement).scrollHeight > 200
     })
     return {
       blockData,
@@ -74,16 +76,12 @@ export default defineComponent({
 .cc-textarea {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  /* -webkit-line-clamp: 8; */
-  overflow: hidden;
-  height: 100%;
+  overflow: scroll;
+  min-height: inherit;
 }
 
-.fix-height {
+.cc-textarea-need-open {
   height: 200px;
-}
-
-[contenteditable]:focus {
-  outline: none;
+  overflow: hidden;
 }
 </style>

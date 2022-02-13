@@ -20,6 +20,7 @@ import { defineComponent, PropType, ref } from 'vue'
 import { AlertType } from '../alert/type'
 
 export default defineComponent({
+  name: 'cc-alert',
   props: {
     message: String,
     type: {
