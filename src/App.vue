@@ -18,7 +18,7 @@ body,
 #app {
   width: 100%;
   height: 100%;
-  background: rgb(197, 229, 247, 0.1);
+  background: rgba(213, 239, 255, 0.1);
 }
 
 ::-webkit-scrollbar {

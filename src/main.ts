@@ -8,6 +8,7 @@ import container from './components/container'
 import dropdown from './components/dropdown'
 import foldtag from './components/foldtag'
 import form from './components/form'
+import loader from './components/loader'
 
 import router from './router'
 
@@ -20,6 +21,7 @@ app.use(alert)
   .use(form)
   .use(foldtag)
   .use(calendar)
+  .use(loader)
 
 app.use(router)
 app.mount('#app')
