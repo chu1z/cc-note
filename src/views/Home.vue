@@ -52,7 +52,7 @@
       </cc-block>
       <cc-content-list :contents="testData"></cc-content-list>
     </cc-main>
-    <cc-loading-container :background="`rgba(0,0,0,0.5)`" :text="`正在加载中...`"/>
+    <!-- <cc-loading-container :background="`rgba(0,0,0,0.5)`" :text="`正在加载中...`"/> -->
   </cc-container>
 </template>
 

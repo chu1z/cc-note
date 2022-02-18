@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <cc-form class="cc-form">
+    <cc-form class="cc-form" @form-submit="onFormSubmit">
       <cc-form-item class="mb-4">
         <h2 class="text-center">CC-Note</h2>
       </cc-form-item>
@@ -38,9 +38,11 @@
 <script lang="ts">
 import { defineComponent, provide, reactive } from '@vue/runtime-core'
 import { formkey, RuleProp } from '../components/form/type'
+import store from '../store'
+
+const sha1 = require('sha1')
 
 export default defineComponent({
-
   setup() {
     const model = reactive({
       email: '',
@@ -58,8 +60,17 @@ export default defineComponent({
       model,
       rules
     })
+
+    const onFormSubmit = (result: boolean) => {
+      if (result) {
+        const payload = { email: model.email, password: sha1(model.password) }
+        store.dispatch('login', payload)
+      }
+    }
+
     return {
-      model
+      model,
+      onFormSubmit
     }
   }
 })

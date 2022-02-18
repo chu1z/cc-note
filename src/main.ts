@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createApp } from 'vue'
 import App from './App.vue'
 
@@ -13,6 +14,8 @@ import loader from './components/loader'
 import router from './router'
 
 const app = createApp(App)
+
+axios.defaults.baseURL = 'http://127.0.0.1:8004'
 
 app.use(alert)
   .use(block)
