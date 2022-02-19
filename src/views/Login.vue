@@ -40,10 +40,13 @@ import { defineComponent, provide, reactive } from '@vue/runtime-core'
 import { formkey, RuleProp } from '../components/form/type'
 import store from '../store'
 
-const sha1 = require('sha1')
+import sha1 from 'sha1'
+import { useRouter } from 'vue-router'
+import createAlert from '../components/alert/createAlert'
 
 export default defineComponent({
   setup() {
+    const router = useRouter()
     const model = reactive({
       email: '',
       password: ''
@@ -64,7 +67,17 @@ export default defineComponent({
     const onFormSubmit = (result: boolean) => {
       if (result) {
         const payload = { email: model.email, password: sha1(model.password) }
-        store.dispatch('login', payload)
+        store
+          .dispatch('login', payload)
+          .then((data) => {
+            setTimeout(() => {
+              router.push('/')
+            }, 2000)
+            createAlert(data.message, 'success', 1000)
+          })
+          .catch((data) => {
+            createAlert(data.message, 'error', 2000)
+          })
       }
     }
 

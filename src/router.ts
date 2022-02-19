@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createRouter, createWebHistory } from 'vue-router'
 import store from './store'
 import Home from './views/Home.vue'
@@ -30,14 +31,29 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const { user } = store.state
+  const { user, token } = store.state
   // TODO to.meta.redirectAlreadyLogin这个值会为underfind
-  if (!user.isLogin && to.meta.requiredLogin) {
-    next('login')
-  } else if (user.isLogin && to.meta.redirectAlreadyLogin) {
-    next('/')
+  if (!user.isLogin) {
+    if (token) {
+      axios.defaults.headers.common.Authorization = token
+      store.dispatch('getUserInfo').then((data) => {
+        next('/')
+      }).catch(() => {
+        next('/login')
+      })
+    } else {
+      if (to.meta.requiredLogin) {
+        next('login')
+      } else {
+        next()
+      }
+    }
   } else {
-    next()
+    if (to.meta.redirectAlreadyLogin) {
+      next('/')
+    } else {
+      next()
+    }
   }
 })
 
